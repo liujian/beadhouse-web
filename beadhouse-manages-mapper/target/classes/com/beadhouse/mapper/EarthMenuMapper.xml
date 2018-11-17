@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beadhouse.mapper.EarthMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.EarthMenu" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="NUMBER" property="number" jdbcType="VARCHAR" />
+    <result column="ISLEAF" property="isleaf" jdbcType="SMALLINT" />
+    <result column="LEVEL" property="level" jdbcType="SMALLINT" />
+    <result column="PARENTID" property="parentid" jdbcType="BIGINT" />
+    <result column="TARGETNAME" property="targetname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, VERSION, CREATETIME, NAME, URL, NUMBER, ISLEAF, LEVEL, PARENTID, TARGETNAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from earth_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      <!-- order by ${orderByClause} -->
+      order by id
+    </if>
+  </select>
+  
+  <select id="selectByExample2" resultMap="BaseResultMap" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+   select  id,name ,url,level,(SELECT NAME FROM earth_menu WHERE id = a.parentid ) parentidname from earth_menu a
+       <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  
+    <select id="selectByExample3" resultMap="BaseResultMap" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+   
+   SELECT d.* FROM	earth_operator a,earth_role_operator b,earth_role_menu c,earth_menu d WHERE a.ID=b.OPERATORID
+    and b.ROLEID=c.ROLEID and c.MENUID=d.ID  
+      <if test="loginname != null and !&quot;&quot;.equals(loginname.trim())">
+	    	and a.loginname=#{loginname}
+	    </if>
+   
+   
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from earth_menu
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from earth_menu
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+    delete from earth_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+   <delete id="deleteByExample2" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+    delete from earth_action where menuid=#{menuid}   
+  </delete>
+   <delete id="deleteByExample3" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+    delete from earth_role_menu where menuid=#{menuid}
+  </delete>
+   <delete id="deleteByExample4" parameterType="com.beadhouse.pojo.EarthMenuExample" >
+   delete a from earth_role_action a ,earth_action b where a.actionid=b.id and b.menuid=#{menuid}
+  </delete>
+  
+  
+  
+  
+  <insert id="insert" parameterType="com.beadhouse.pojo.EarthMenu" >
+    insert into earth_menu (ID, VERSION, CREATETIME, 
+      NAME, URL, NUMBER, 
+      ISLEAF, LEVEL, PARENTID, 
+      TARGETNAME)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{isleaf,jdbcType=SMALLINT}, #{level,jdbcType=SMALLINT}, #{parentid,jdbcType=BIGINT}, 
+      #{targetname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.beadhouse.pojo.EarthMenu" >
+    insert into earth_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="number != null" >
+        NUMBER,
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="parentid != null" >
+        PARENTID,
+      </if>
+      <if test="targetname != null" >
+        TARGETNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null" >
+        #{isleaf,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=SMALLINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="targetname != null" >
+        #{targetname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.beadhouse.pojo.EarthMenuExample" resultType="java.lang.Integer" >
+    select count(*) from earth_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update earth_menu
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        NUMBER = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isleaf != null" >
+        ISLEAF = #{record.isleaf,jdbcType=SMALLINT},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=SMALLINT},
+      </if>
+      <if test="record.parentid != null" >
+        PARENTID = #{record.parentid,jdbcType=BIGINT},
+      </if>
+      <if test="record.targetname != null" >
+        TARGETNAME = #{record.targetname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update earth_menu
+    set ID = #{record.id,jdbcType=BIGINT},
+      VERSION = #{record.version,jdbcType=INTEGER},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      NUMBER = #{record.number,jdbcType=VARCHAR},
+      ISLEAF = #{record.isleaf,jdbcType=SMALLINT},
+      LEVEL = #{record.level,jdbcType=SMALLINT},
+      PARENTID = #{record.parentid,jdbcType=BIGINT},
+      TARGETNAME = #{record.targetname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.beadhouse.pojo.EarthMenu" >
+    update earth_menu
+    <set >
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        NUMBER = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF = #{isleaf,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=SMALLINT},
+      </if>
+      <if test="parentid != null" >
+        PARENTID = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="targetname != null" >
+        TARGETNAME = #{targetname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.beadhouse.pojo.EarthMenu" >
+    update earth_menu
+    set VERSION = #{version,jdbcType=INTEGER},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      NAME = #{name,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      NUMBER = #{number,jdbcType=VARCHAR},
+      ISLEAF = #{isleaf,jdbcType=SMALLINT},
+      LEVEL = #{level,jdbcType=SMALLINT},
+      PARENTID = #{parentid,jdbcType=BIGINT},
+      TARGETNAME = #{targetname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

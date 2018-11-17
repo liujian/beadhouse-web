@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.beadhouse</groupId>
+    <artifactId>beadhouse-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.beadhouse</groupId>
+  <artifactId>beadhouse-manages</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <!-- 依赖管理 -->
+	<dependencies>
+		<dependency>
+			<groupId>com.beadhouse</groupId>
+			<artifactId>beadhouse-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<!-- 配置插件 -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>8081</port>
+					<path>/</path>
+					<url>http://192.168.239.12:8080/manager/text</url>
+					<username>tomcat</username>
+					<password>tomcat</password>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>../beadhouse-manages-mapper</module>
+		<module>../beadhouse-manages-pojo</module>
+		<module>../beadhouse-manages-service</module>
+		<module>../beadhouse-manages-web</module>
+	</modules>
+</project>

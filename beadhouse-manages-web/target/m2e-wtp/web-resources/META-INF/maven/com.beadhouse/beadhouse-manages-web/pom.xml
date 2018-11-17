@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.beadhouse</groupId>
+    <artifactId>beadhouse-manages</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>beadhouse-manages-web</artifactId>
+  <packaging>war</packaging>
+  	<!-- 依赖管理 -->
+	<dependencies>
+		<!-- JSP相关 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 单点登录 -->
+			<dependency>
+			  <groupId>com.ccic.cas</groupId>
+			  <artifactId>cas-client</artifactId>
+			  <version>5.0.0</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.ccic.cas</groupId>
+			  <artifactId>cas-client-core</artifactId>
+			  <version>3.1.11</version>
+			</dependency>
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.beadhouse</groupId>
+			<artifactId>beadhouse-manages-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>

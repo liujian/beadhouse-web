@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beadhouse.mapper.EarthOperatorMapper" >
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.EarthOperator" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+    <result column="LOGINPWD" property="loginpwd" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+    <result column="MOBILENO" property="mobileno" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="CHAR" />
+    <result column="LASTLOGINTIME" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="ISCHANGEDPWD" property="ischangedpwd" jdbcType="SMALLINT" />
+    <result column="PWDERRORCOUNT" property="pwderrorcount" jdbcType="SMALLINT" />
+    <result column="PWDERRORTIME" property="pwderrortime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+    <sql id="Example_Where_Clause2" >
+     
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="and" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+     
+  </sql>
+  
+  
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, VERSION, CREATETIME, LOGINNAME, LOGINPWD, REMARK, REALNAME, MOBILENO, STATUS, 
+    TYPE, LASTLOGINTIME, ISCHANGEDPWD, PWDERRORCOUNT, PWDERRORTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.beadhouse.pojo.EarthOperatorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from earth_operator
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+    <select id="selectByExample2" resultMap="BaseResultMap" parameterType="com.beadhouse.pojo.EarthOperatorExample" >
+      <!--  SELECT b.*,a.ROLEID roleid from earth_role_operator a,earth_operator b where a.OPERATORID=b.ID --> 
+    select a.*,b.ROLENAME rolename,c.ROLEID roleid from earth_operator a,earth_role b,earth_role_operator c where a.ID=c.OPERATORID and b.ID=c.ROLEID 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause2" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from earth_operator
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from earth_operator
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.beadhouse.pojo.EarthOperatorExample" >
+    delete from earth_operator
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert"   useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.beadhouse.pojo.EarthOperator" >
+    insert into earth_operator (ID, VERSION, CREATETIME, 
+      LOGINNAME, LOGINPWD, REMARK, 
+      REALNAME, MOBILENO, STATUS, 
+      TYPE, LASTLOGINTIME, ISCHANGEDPWD, 
+      PWDERRORCOUNT, PWDERRORTIME)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{loginname,jdbcType=VARCHAR}, #{loginpwd,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{mobileno,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{lastlogintime,jdbcType=TIMESTAMP}, #{ischangedpwd,jdbcType=SMALLINT}, 
+      #{pwderrorcount,jdbcType=SMALLINT}, #{pwderrortime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.beadhouse.pojo.EarthOperator" >
+    insert into earth_operator
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="loginname != null" >
+        LOGINNAME,
+      </if>
+      <if test="loginpwd != null" >
+        LOGINPWD,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="realname != null" >
+        REALNAME,
+      </if>
+      <if test="mobileno != null" >
+        MOBILENO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="lastlogintime != null" >
+        LASTLOGINTIME,
+      </if>
+      <if test="ischangedpwd != null" >
+        ISCHANGEDPWD,
+      </if>
+      <if test="pwderrorcount != null" >
+        PWDERRORCOUNT,
+      </if>
+      <if test="pwderrortime != null" >
+        PWDERRORTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpwd != null" >
+        #{loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null" >
+        #{mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ischangedpwd != null" >
+        #{ischangedpwd,jdbcType=SMALLINT},
+      </if>
+      <if test="pwderrorcount != null" >
+        #{pwderrorcount,jdbcType=SMALLINT},
+      </if>
+      <if test="pwderrortime != null" >
+        #{pwderrortime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.beadhouse.pojo.EarthOperatorExample" resultType="java.lang.Integer" >
+    select count(*) from earth_operator
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update earth_operator
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginname != null" >
+        LOGINNAME = #{record.loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginpwd != null" >
+        LOGINPWD = #{record.loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        REALNAME = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileno != null" >
+        MOBILENO = #{record.mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.lastlogintime != null" >
+        LASTLOGINTIME = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ischangedpwd != null" >
+        ISCHANGEDPWD = #{record.ischangedpwd,jdbcType=SMALLINT},
+      </if>
+      <if test="record.pwderrorcount != null" >
+        PWDERRORCOUNT = #{record.pwderrorcount,jdbcType=SMALLINT},
+      </if>
+      <if test="record.pwderrortime != null" >
+        PWDERRORTIME = #{record.pwderrortime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update earth_operator
+    set ID = #{record.id,jdbcType=BIGINT},
+      VERSION = #{record.version,jdbcType=INTEGER},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      LOGINNAME = #{record.loginname,jdbcType=VARCHAR},
+      LOGINPWD = #{record.loginpwd,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      REALNAME = #{record.realname,jdbcType=VARCHAR},
+      MOBILENO = #{record.mobileno,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=CHAR},
+      LASTLOGINTIME = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      ISCHANGEDPWD = #{record.ischangedpwd,jdbcType=SMALLINT},
+      PWDERRORCOUNT = #{record.pwderrorcount,jdbcType=SMALLINT},
+      PWDERRORTIME = #{record.pwderrortime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.beadhouse.pojo.EarthOperator" >
+    update earth_operator
+    <set >
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginname != null" >
+        LOGINNAME = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpwd != null" >
+        LOGINPWD = #{loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        REALNAME = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null" >
+        MOBILENO = #{mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        LASTLOGINTIME = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ischangedpwd != null" >
+        ISCHANGEDPWD = #{ischangedpwd,jdbcType=SMALLINT},
+      </if>
+      <if test="pwderrorcount != null" >
+        PWDERRORCOUNT = #{pwderrorcount,jdbcType=SMALLINT},
+      </if>
+      <if test="pwderrortime != null" >
+        PWDERRORTIME = #{pwderrortime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.beadhouse.pojo.EarthOperator" >
+    update earth_operator
+    set VERSION = #{version,jdbcType=INTEGER},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      LOGINNAME = #{loginname,jdbcType=VARCHAR},
+      LOGINPWD = #{loginpwd,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      REALNAME = #{realname,jdbcType=VARCHAR},
+      MOBILENO = #{mobileno,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=CHAR},
+      LASTLOGINTIME = #{lastlogintime,jdbcType=TIMESTAMP},
+      ISCHANGEDPWD = #{ischangedpwd,jdbcType=SMALLINT},
+      PWDERRORCOUNT = #{pwderrorcount,jdbcType=SMALLINT},
+      PWDERRORTIME = #{pwderrortime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

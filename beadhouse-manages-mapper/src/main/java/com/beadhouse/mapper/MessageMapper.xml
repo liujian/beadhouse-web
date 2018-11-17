@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beadhouse.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.ChatHistory">
+  
+    <id column="chatid" property="chatid" jdbcType="INTEGER" />
+    <result column="loginUserId" jdbcType="INTEGER" property="loginUserId" />
+     <result column="emailAddress" jdbcType="VARCHAR" property="emailAddress" />
+    <result column="elderUserId" jdbcType="INTEGER" property="elderUserId" />
+     <result column="elderUserEmail" jdbcType="VARCHAR" property="elderUserEmail" />
+    <result column="questId" jdbcType="INTEGER" property="questId" />
+    <result column="defineQuestId" jdbcType="INTEGER" property="defineQuestId" />
+    <result column="defineQuest" jdbcType="VARCHAR" property="defineQuest" />
+    <result column="quest" jdbcType="VARCHAR" property="quest" />
+    <result column="userVoiceUrl" jdbcType="VARCHAR" property="userVoiceUrl" />
+    <result column="voicequest" jdbcType="VARCHAR" property="voicequest" />
+    <result column="questDate" property="questDate" jdbcType="TIMESTAMP" />
+    <result column="elderUserResponse" property="elderUserResponse" jdbcType="VARCHAR" />
+    <result column="elderUserVoiceUrl" property="elderUserVoiceUrl" jdbcType="VARCHAR" />
+    <result column="responseDate" property="responseDate" jdbcType="TIMESTAMP" />
+    
+     
+  </resultMap>
+  <sql id="Base_Column_List">
+    chatid,loginUserId,emailAddress,elderUserId,elderUserEmail,questId,defineQuestId,defineQuest,quest,userVoiceUrl,voicequest,questDate,elderUserResponse,elderUserVoiceUrl,responseDate
+  </sql>
+  <select id="selectChatbyorderUser" parameterType="com.beadhouse.pojo.ChatHistory" resultMap="BaseResultMap">
+    select 
+    Table_Chat_History.chatid,
+	Table_Chat_History.loginUserId,
+	Table_login_user.emailAddress,
+	Table_Chat_History.elderUserId,
+	Table_elder_user.elderUserEmail,
+	Table_Chat_History.questId,
+	Table_Chat_History.defineQuestId,
+	table_define_quest.defineQuest,
+	Table_Chat_History.quest,
+	Table_Chat_History.userVoiceUrl,
+	Table_Chat_History.voicequest,
+	Table_Chat_History.questDate,
+	Table_Chat_History.elderUserResponse,
+	Table_Chat_History.elderUserVoiceUrl,
+	Table_Chat_History.responseDate
+    from 
+      Table_Chat_History 
+       LEFT JOIN Table_login_user 
+              ON 
+               Table_login_user.Id = Table_chat_history.loginUserId
+       LEFT JOIN Table_elder_user
+              ON
+               Table_elder_user.elderUserId=Table_chat_history.elderUserId      
+       LEFT JOIN table_define_quest
+              ON
+               table_define_quest.defineQuestId=Table_chat_history.defineQuestId  
+     <if test="elderUserEmail != null and  elderUserEmail != ''">
+           <![CDATA[ where Table_elder_user.elderUserEmail like concat('%',#{elderUserEmail},'%')]]>
+      </if>
+    order by questdate 
+  </select>
+  
+
+  
+
+</mapper>

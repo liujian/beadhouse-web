@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beadhouse.mapper.OrderUserMapper">
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.OrderUser">
+  
+    <id column="elderUserId" property="elderUserId" jdbcType="INTEGER" />
+    <result column="elderUserEmail" jdbcType="VARCHAR" property="elderUserEmail" />
+    <result column="elderFirstName" jdbcType="VARCHAR" property="elderFirstName" />
+    <result column="elderLastName" jdbcType="VARCHAR" property="elderLastName" />
+    <result column="elderBirthday" jdbcType="VARCHAR" property="elderBirthday" />
+    <result column="elderUserAge" jdbcType="INTEGER" property="elderUserAge" />
+    <result column="elderUserAddress" jdbcType="VARCHAR" property="elderUserAddress" />
+    <result column="elderUserPassword" jdbcType="VARCHAR" property="elderUserPassword" />
+    <result column="elderUserphone" jdbcType="VARCHAR" property="elderUserphone" />
+    <result column="elderUserOther" jdbcType="VARCHAR" property="elderUserOther" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="createUser" property="createUser" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="elderAvatar" property="elderAvatar" jdbcType="VARCHAR" />
+    <result column="modificationdate" property="modificationdate" jdbcType="TIMESTAMP" />
+    <result column="modificationuser" property="modificationuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    elderUserEmail, elderFirstName,elderLastName,elderBirthday, elderUserAge, elderUserAddress, elderUserPassword, elderUserphone, elderUserOther,createdate,createUser,modificationdate,modificationuser,token,elderAvatar
+  </sql>
+  <select id="selectByOrderUserEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Table_elder_user
+    where elderUserEmail = #{elderUserEmail,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectAllOrderUser" parameterType="com.beadhouse.pojo.OrderUser"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Table_elder_user
+     <if test="elderUserEmail != null and  elderUserEmail != ''">
+          <![CDATA[ where elderUserEmail like concat('%',#{elderUserEmail},'%')]]>
+      </if>
+    order by createdate
+    
+  </select>
+  
+  <insert id="insertOrderUser" parameterType="com.beadhouse.pojo.OrderUser">
+      insert into 
+        Table_elder_user (
+          elderUserEmail,
+          elderFirstName,
+          elderLastName, 
+          elderBirthday,
+          elderUserAge, 
+          elderUserAddress, 
+          elderUserPassword,
+          elderUserphone,
+          elderUserOther,
+          createdate,
+          createUser,
+          modificationdate,
+          modificationuser
+          )
+      values (
+      #{elderUserEmail,jdbcType=VARCHAR}, 
+      #{elderFirstName,jdbcType=VARCHAR},
+      #{elderLastName,jdbcType=VARCHAR},
+      #{elderBirthday,jdbcType=VARCHAR},
+      #{elderUserAge,jdbcType=INTEGER}, 
+      #{elderUserAddress,jdbcType=VARCHAR},
+      #{elderUserPassword,jdbcType=VARCHAR},
+      #{elderUserphone,jdbcType=VARCHAR},
+      #{elderUserOther,jdbcType=VARCHAR},
+      #{createdate,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR},
+      #{modificationdate,jdbcType=TIMESTAMP},
+      #{modificationuser,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+    <update id="updateOrderUser" parameterType="com.beadhouse.pojo.OrderUser">
+        UPDATE
+        Table_elder_user
+        SET
+        elderFirstName=#{elderFirstName},
+        elderLastName=#{elderLastName},
+        elderBirthday=#{elderBirthday},
+        elderUserAge=#{elderUserAge},
+        elderUserAddress=#{elderUserAddress},
+        elderUserPassword=#{elderUserPassword},
+        elderUserphone=#{elderUserphone},
+        elderUserOther=#{elderUserOther},
+        modificationuser=#{modificationuser},
+        modificationdate=#{modificationdate}
+        where
+        elderUserEmail=#{elderUserEmail}
+      
+    </update>
+    
+    <delete id="deleteOrderUser" parameterType="String">
+        delete from Table_elder_user
+        where
+        elderUserEmail=#{elderUserEmail}
+    </delete>
+
+
+</mapper>
