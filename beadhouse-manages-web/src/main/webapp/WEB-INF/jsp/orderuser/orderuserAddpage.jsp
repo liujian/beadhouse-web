@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-jbox/2.3/Skins2/Metro/jbox_style.css" />
 	<script type="text/javascript" src="<%=basePath%>js/jquery-jbox/2.3/jquery.jBox-2.3.js"></script>
 	 <script src="<%=basePath%>js/cpsd.js" type="text/javascript"></script>
+	  <script src="<%=basePath%>js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 </head>
 <script type="text/javascript">
 	$(function(){
@@ -32,23 +34,35 @@
 	function dataverify(){
 	    var p1 = document.getElementById("elderUserEmail").value;
         if(isEmpty(p1)){    
-           alertx("The account of the elderly can not be empty.", 'Tips'); 
+           alertx("The Elder's account cannot be empty.", 'Tips'); 
             return ;
         } 
         var p2 = document.getElementById("elderUserPassword").value;
         if(isEmpty(p2)){    
-           alertx("The old password cannot be empty.", 'Tips'); 
+           alertx("The Elder's Password can not be empty.", 'Tips'); 
             return ;
         } 
         
-        var p3 = $("#elderUserName").val();
+        var p3 = $("#elderfirstName").val();
         if(isEmpty(p3)){
-        	alertx("The old man's name must not be empty.", 'Tips');
+        	alertx("The Elder's First Name can not be empty.", 'Tips');
               return ;
         } 
-        var p4 = $("#elderUserAddress").val();
+        var p4 = $("#elderlastName").val();
         if(isEmpty(p4)){
-        	alertx("The home address of the elderly can not be empty.", 'Tips');
+        	alertx("The Elder's Last Name can not be empty.", 'Tips');
+              return ;
+        } 
+        
+        var p6 = $("#elderbirthday").val();
+        if(isEmpty(p6)){
+        	alertx("The Elder's Birthday can not be empty.", 'Tips');
+              return ;
+        } 
+        
+        var p7 = $("#elderUserphone").val();
+        if(isEmpty(p7)){
+        	alertx("The Elder's Phone can not be empty.", 'Tips');
               return ;
         } 
         
@@ -140,21 +154,21 @@
 	    	 </li>
 	    	<li>
 	    		<label style="width:120px;"><font color="#f00">*</font>Elder's First Name</label>
-	    		<input name="elderfirstName" id="elderUserName" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderFirstName}" />
+	    		<input name="elderfirstName" id="elderfirstName" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderFirstName}" />
 	    	 </li>
 	    	 <li>
-	    		<label style="width:120px;"><font color="#f00"></font>Elder's Last Name</label>
-	    		<input name="elderlastName" id="elderUserAge" type="text" class="dfinput" value="${obj.elderLastName}" />
+	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Last Name</label>
+	    		<input name="elderlastName" id="elderlastName" type="text" class="dfinput" placeholder="Please enter" value="${obj.elderLastName}" />
 	    		
 	    	 </li>
 	    	 <li>
 	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Birthday</label>
-	    	  <input name="elderbirthday" id="elderUserAddress" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderBirthday}" />
-	    		
+<%-- 	    	  <input name="elderbirthday" id="elderbirthday" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderBirthday}" />
+ --%>	    		<input type="text"  placeholder="Please Select The Date"  id="elderbirthday" name="elderbirthday" value="${obj.elderBirthday}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
 	    	 </li>
 	    	  <li>
-	    		<label style="width:120px;"><font color="#f00"></font>Elder's Phone</label>
-	    		<input name="elderUserphone" id="elderUserphone" type="text" class="dfinput"  value="${obj.elderUserphone}" />
+	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Phone</label>
+	    		<input name="elderUserphone" id="elderUserphone" type="text" class="dfinput" placeholder="Please enter" value="${obj.elderUserphone}" />
 	    		
 	    	 </li>
 	    	  <li>

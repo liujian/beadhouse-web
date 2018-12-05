@@ -26,7 +26,7 @@ import com.beadhouse.service.OrderUserService;
  *
  * @author liujian
  * @date 2018年9月27日
- * @class ProductController.java
+ * @class OrderUserController.java
  */
 @Controller
 @RequestMapping("/OrderUser")
@@ -135,7 +135,7 @@ public class OrderUserController {
 		OrderUser Cpi= orderUserService.getOrderUser(orderUser.getElderUserEmail());
 		EarthResult str=null;
 		if(Cpi!=null){
-			 str=EarthResult.build(0, "当前老人账号 已经维护了一条数据!");
+			 str=EarthResult.build(0, "The account exists!");
 		}else{
 			 str=EarthResult.build(1, "1");
 		}

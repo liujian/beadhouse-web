@@ -76,7 +76,7 @@ $(document).ready(function(){
 		     <input type="button" class="scbtn" onclick="query()" value="Search"/>
 		     </li>
 		      <li><label>&nbsp;</label>
-		      <input type="button" class="scbtn" onclick="empty()" value="Clean"/>
+		      <input type="button" class="scbtn" onclick="empty()" value="Reset"/>
 		     </li>
 	         <li><label>&nbsp;</label>
 	         <input type="button" class="scbtn" onclick="addsave()" value="New"/>

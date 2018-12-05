@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beadhouse.mapper.ScheduleMapper">
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.Schedule">
+    <id column="scheduleId" jdbcType="INTEGER" property="scheduleId" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="breakfast" property="breakfast" jdbcType="VARCHAR" />
+    <result column="lunch" property="lunch" jdbcType="VARCHAR" />
+    <result column="dinner" property="dinner" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    scheduleId,date,breakfast,lunch,dinner
+  </sql>
+  
+   <select id="getSchedule" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_schedule   
+     where scheduleId=#{scheduleId}
+   
+  </select>
+  
+  <select id="getscheduleList" parameterType="com.beadhouse.pojo.Schedule" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_schedule
+     <if test="date != null and  date != ''">
+         where date=#{date}
+      </if>
+      order by date
+  </select>
+  
+    <insert id="insertSchedule" parameterType="com.beadhouse.pojo.Schedule">
+      insert into 
+        table_schedule (
+          date, 
+          breakfast,
+          lunch,
+          dinner
+          )
+      values (
+      #{date,jdbcType=TIMESTAMP},
+      #{breakfast,jdbcType=VARCHAR},
+      #{lunch,jdbcType=VARCHAR},
+      #{dinner,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+    <update id="updateSchedule" parameterType="com.beadhouse.pojo.Schedule">
+        UPDATE
+        table_schedule
+        SET
+        date=#{date},
+        breakfast=#{breakfast},
+        lunch=#{lunch},
+        dinner=#{dinner}
+        where
+        scheduleId=#{scheduleId}
+    </update>
+    
+  <delete id="deleteschedule" parameterType="java.lang.Integer">
+        delete from table_schedule
+        where
+        scheduleId=#{scheduleId}
+    </delete>
+
+</mapper>

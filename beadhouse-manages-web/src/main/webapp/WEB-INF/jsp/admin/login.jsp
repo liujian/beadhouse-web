@@ -145,10 +145,10 @@
 
 		</div>
 
-		<div class="loginbm">
+	<!-- 	<div class="loginbm">
 			版权所有 2018
 			<a href="">Made In XBMU</a>
-		</div>
+		</div> -->
 
 	</body>
 </html>

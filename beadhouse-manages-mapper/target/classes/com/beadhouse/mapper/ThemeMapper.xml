@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beadhouse.mapper.ThemeMapper">
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.Theme">
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    logo, color
+  </sql>
+  
+   <select id="selectTheme" parameterType="com.beadhouse.pojo.Theme" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_theme
+  </select>
+  
+   <select id="getTheme" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_theme
+    Where 
+      logo=#{logo}
+  </select>
+   <update id="updateTheme" parameterType="com.beadhouse.pojo.Theme">
+        UPDATE
+        table_theme
+        SET
+        logo=#{logo},
+        color=#{color}
+    </update>
+</mapper>

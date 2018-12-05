@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beadhouse.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.User">
+  
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="emailAddress" jdbcType="VARCHAR" property="emailAddress" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="firstName" jdbcType="VARCHAR" property="firstName" />
+    <result column="lastName" jdbcType="VARCHAR" property="lastName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="userAvatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="fireBaseToken" property="fireBaseToken" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+     id,emailAddress,password,firstName,lastName,phone,birthday,token,createDate,updateDate,userAvatar,fireBaseToken
+  </sql>
+  
+  
+  <select id="getUserByEmailAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from table_login_user
+    where emailAddress = #{emailAddress,jdbcType=VARCHAR} 
+  </select>
+  
+    <select id="getUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from table_login_user
+    where id = #{id,jdbcType=INTEGER} 
+  </select>
+  
+  <select id="getUserList" parameterType="com.beadhouse.pojo.User"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from table_login_user
+     <if test="emailAddress != null and  emailAddress != ''">
+          <![CDATA[ where emailAddress like concat('%',#{emailAddress},'%')]]>
+      </if>
+    order by createDate
+    
+  </select>
+  
+  <insert id="inserUser" parameterType="com.beadhouse.pojo.User">
+      insert into 
+        table_login_user (
+          emailAddress,
+          password,
+          firstName,
+          lastName,
+          phone,
+          birthday,
+          token,
+          createDate
+          )
+      values (
+      #{emailAddress,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR},
+      #{firstName,jdbcType=VARCHAR},
+      #{lastName,jdbcType=VARCHAR},
+      #{phone,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=VARCHAR},
+      #{token,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+    <update id="updateUser" parameterType="com.beadhouse.pojo.User">
+        UPDATE
+        table_login_user
+        SET
+        password=#{password},
+        firstName=#{firstName},
+        lastName=#{lastName},
+        firstName=#{firstName},
+        lastName=#{lastName},
+        phone=#{phone},
+        birthday=#{birthday},
+        updateDate=#{updateDate}
+        where
+        id=#{id}
+      
+    </update>
+    
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from table_login_user
+        where
+        id=#{id}
+    </delete>
+
+
+</mapper>

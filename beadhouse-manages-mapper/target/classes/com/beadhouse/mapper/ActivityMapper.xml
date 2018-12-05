@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beadhouse.mapper.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.beadhouse.pojo.Activity">
+    <id column="activityId" jdbcType="INTEGER" property="activityId" />
+    <result column="activity" property="activity" jdbcType="VARCHAR" />
+    <result column="scheduleId" property="scheduleId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    activityId,activity,scheduleId
+  </sql>
+    <select id="getActivity" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_activity 
+       Where 
+        activityId=#{activityId}
+  </select>
+  
+  <select id="getactivityList" parameterType="com.beadhouse.pojo.Activity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_activity 
+       Where 
+        scheduleId=#{scheduleId}
+      order by activity 
+  </select>
+  
+    <insert id="insertActivity" parameterType="com.beadhouse.pojo.Activity">
+      insert into 
+        table_activity (
+          activity,
+          scheduleId
+          )
+      values (
+      #{activity,jdbcType=VARCHAR},
+      #{scheduleId,jdbcType=INTEGER}
+      )
+  </insert>
+  
+    <update id="updateActivity" parameterType="com.beadhouse.pojo.Activity">
+        UPDATE
+        table_activity
+        SET
+        activity=#{activity}
+        where
+        activityId=#{activityId}
+    </update>
+    
+  <delete id="deleteActivity" parameterType="java.lang.Integer">
+        delete from table_activity
+        where
+        activityId=#{activityId}
+    </delete>
+
+</mapper>
