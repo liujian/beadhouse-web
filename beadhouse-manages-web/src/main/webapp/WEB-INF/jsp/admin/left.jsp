@@ -38,7 +38,7 @@
 
 	<body style="background: #f0f9fd;">
 		<div class="lefttop">
-			<span></span>Data Manipulation
+			<span></span>Database Management
 		</div>
 
 		<dl class="leftmenu">

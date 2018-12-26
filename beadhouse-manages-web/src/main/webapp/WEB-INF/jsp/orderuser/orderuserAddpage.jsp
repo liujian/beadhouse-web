@@ -43,18 +43,18 @@
             return ;
         } 
         
-        var p3 = $("#elderfirstName").val();
+        var p3 = $("#elderFirstName").val();
         if(isEmpty(p3)){
         	alertx("The Elder's First Name can not be empty.", 'Tips');
               return ;
         } 
-        var p4 = $("#elderlastName").val();
+        var p4 = $("#elderLastName").val();
         if(isEmpty(p4)){
         	alertx("The Elder's Last Name can not be empty.", 'Tips');
               return ;
         } 
         
-        var p6 = $("#elderbirthday").val();
+        var p6 = $("#elderBirthday").val();
         if(isEmpty(p6)){
         	alertx("The Elder's Birthday can not be empty.", 'Tips');
               return ;
@@ -154,17 +154,17 @@
 	    	 </li>
 	    	<li>
 	    		<label style="width:120px;"><font color="#f00">*</font>Elder's First Name</label>
-	    		<input name="elderfirstName" id="elderfirstName" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderFirstName}" />
+	    		<input name="elderFirstName" id="elderFirstName" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderFirstName}" />
 	    	 </li>
 	    	 <li>
 	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Last Name</label>
-	    		<input name="elderlastName" id="elderlastName" type="text" class="dfinput" placeholder="Please enter" value="${obj.elderLastName}" />
+	    		<input name="elderLastName" id="elderLastName" type="text" class="dfinput" placeholder="Please enter" value="${obj.elderLastName}" />
 	    		
 	    	 </li>
 	    	 <li>
 	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Birthday</label>
 <%-- 	    	  <input name="elderbirthday" id="elderbirthday" type="text" class="dfinput"  placeholder="Please enter" value="${obj.elderBirthday}" />
- --%>	    		<input type="text"  placeholder="Please Select The Date"  id="elderbirthday" name="elderbirthday" value="${obj.elderBirthday}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
+ --%>	    		<input type="text"  placeholder="Please Select The Date"  id="elderBirthday" name="elderBirthday" value="${obj.elderBirthday}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
 	    	 </li>
 	    	  <li>
 	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Phone</label>
@@ -172,7 +172,7 @@
 	    		
 	    	 </li>
 	    	  <li>
-	    		<label style="width:120px;"><font color="#f00"></font>Elder's Explain</label>
+	    		<label style="width:120px;"><font color="#f00"></font>Description</label>
 	    		 <textarea name="elderUserOther" id="elderUserOther" rows="" cols="" class="textinput" >${obj.elderUserOther}</textarea>
 	    	 </li>
 	    	

@@ -14,7 +14,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
-
+/* table th{white-space: nowrap;}
+table td{white-space: nowrap;} */
+body,table{font-size:12px;}
+table{empty-cells:show; border-collapse: collapse; margin:0 auto;}
+h1,h2,h3{ font-size:12px;margin:0; padding:0;}
+table.imgtable{border:1px solid #cad9ea;color:#666;}
+table.imgtable th {background-repeat:repeat-x;height:30px;}
+table.imgtable td,table.imgtable th{border:1px solid #cad9ea;padding:0 1em 0;}
+table.imgtable tr{background-color:#f5fafe;height:30px;}
 </style>
      <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
      <script type="text/javascript" src="<%=basePath%>js/jquery.form.js"></script>
@@ -22,6 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="<%=basePath%>js/jquery-jbox/2.3/Skins2/Metro/jbox_style.css" />
     <script type="text/javascript" src="<%=basePath%>js/jquery-jbox/2.3/jquery.jBox-2.3.js"></script> 
     <script src="js/cpsd.js" type="text/javascript"></script>
+     <script src="<%=basePath%>js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script language="javascript">
 $(function(){	
 	//导航切换
@@ -80,41 +90,49 @@ $(document).ready(function(){
 	         
 	        </ul>
           </form>
-    <table class="imgtable">
+    <table class="imgtable" >
        
     <thead>
-    <tr>
+    <tr class="tr_css">
 	    <th width="100px;">Serial#</th>
 	    <th style="display:none;">聊天id</th>
-	    <th style="width:100px;">User Accounts</th>
-	    <th style="width:100px;">Elderly Accounts</th>
-	    <th style="width:100px;">User Quest</th>
-	    <th style="width:200px;">Custom Questions</th>
-	    <th style="width:200px;">Question Videos/Audios.</th>
-	    <th style="width:200px;">Answers</th>
+	    <th style="white-space: nowrap;">User's Accounts</th>
+	    <th style="white-space: nowrap;">Elder's Accounts</th>
+	    <th style="white-space: nowrap;">Question</th>
+	    <th style="white-space: nowrap;">Question Video/Audio</th>
+	    <th style="white-space: nowrap;">Question Date</th>
+	    <th style="white-space: nowrap;">Answer  Video/Audio</th>
+	    <th style="white-space: nowrap;">Response Date</th>
     </tr>
     </thead>
     
     <tbody>
     <c:forEach items="${chatlist}" var="obj" varStatus="sta">
-	    <tr>
+	    <tr class="tr_css">
 		    <td class="imgtd" style="width:5%;">${sta.index+1}</td>
 		    <td style="display:none;">${obj.chatid}</td>
-		    <td style="width:100px;">${obj.emailAddress}</td>
-		    <td style="width:100px;">${obj.elderUserEmail}</td>
-		    <td style="width:100px;">${obj.quest}</td>
-		    <td style="width:200px;">${obj.defineQuest}</td>
-		    <td style="width:200px;">${obj.voicequest}
-		    <p>
-		    <a href="javascript:void(0)" onclick="passquest('${obj.voicequest}');" class="tablelink">Turn to Question list</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		    <a href="javascript:void(0)" onclick="openuservideo('${obj.userVoiceUrl}');" class="tablelink">Listen/Watch</a>
+		    <td style="white-space: nowrap;">${obj.firstName}${obj.lastName}(${obj.emailAddress})</td>
+		    <td style="white-space: nowrap;">${obj.elderFirstName}${obj.elderLastName}(${obj.elderUserEmail})</td>
+		    <td style="width:600px;">${obj.quest}
+		     <p>
+		    <a style="text-align:right;white-space: nowrap;" href="javascript:void(0)" onclick="passquest('${obj.quest}');" class="tablelink">Add to Question List</a>		      
+		       </p>
+		    </td>
+		    <td style="width:600px;">${obj.voicequest}
+		     <p>
+		    <a href="javascript:void(0)" id="${obj.userVoiceUrl}+1" onclick="openuservideo('${obj.userVoiceUrl}','${obj.userVoiceUrl}+1');" class="tablelink">Listen/Watch</a>
+		    <video id="${obj.userVoiceUrl}" src="${obj.userVoiceUrl}" style="display:none;" controls="controls" width="400" height="300"></video>
 		    </p>
 		    </td>
-		     <td style="width:200px;">${obj.elderUserResponse}
+		     <td style="white-space: nowrap;"><fmt:formatDate value="${obj.questDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+		     <td style="width:600px;">${obj.elderUserResponse}
 		      <p>
-		     <a href="javascript:void(0)" onclick="openorderuservideo('${obj.elderUserVoiceUrl}');" class="tablelink">Listen/Watch</a>  
+		     <a href="javascript:void(0)" id="${obj.elderUserVoiceUrl}+1" onclick="openorderuservideo('${obj.elderUserVoiceUrl}','${obj.elderUserVoiceUrl}+1');" class="tablelink">Listen/Watch</a> 
+		      <video id="${obj.elderUserVoiceUrl}" src="${obj.elderUserVoiceUrl}" style="display:none;" controls="controls" width="400" height="300"></video> 
 		      </p>
 		     </td>
+		      <td style="white-space: nowrap;"><fmt:formatDate value="${obj.responseDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+		 
 	    </tr>
     </c:forEach>
     
@@ -134,30 +152,72 @@ $(document).ready(function(){
     </div>
     
 	<script type="text/javascript">
+	
 	function empty(){
 		$("#keywords").val("");
 	} 
 	
-	function passquest(voicequest){
+	function passquest(quest){
 		var keywords= encodeURI(encodeURI($("#keywords").val()));
- 		 window.location.href="<%=basePath%>historychat/Questupdatepage?quest="+voicequest+"&keywords="+keywords+"";
+ 		 window.location.href="<%=basePath%>historychat/Questupdatepage?quest="+quest+"&keywords="+keywords+"";
  	
 	}
 	
-	 function openuservideo(userVoiceUrl){
+	 function openuservideo(userVoiceUrl,voicequest){
 		 if(userVoiceUrl==null||userVoiceUrl==""){
 			  alertx("No chat audio.", 'Tips'); 
-		 }else{
-			 window.open(userVoiceUrl);
+		 }else if(userVoiceUrl.indexOf("amr")!="-1"){
+			 $.jBox.confirm("AMR file needs to be downloaded to be played. Do you want to download it?", "Download Prompt", function (v, h, f) {
+				 if (v == 'ok'){
+					  var $form = $('<form method="GET"></form>');
+			            $form.attr('action', userVoiceUrl);
+			            $form.appendTo($('body'));
+			            $form.submit();   
+				 }
+				                              
+		     });
+		 }else{		
+			 if(document.getElementById(userVoiceUrl).style.display=="block"){
+			
+				 document.getElementById(userVoiceUrl).style.display="none";
+				 document.getElementById(userVoiceUrl).pause();
+				 document.getElementById(voicequest).innerHTML="Listen/Watch";
+			 }else{
+				 document.getElementById(userVoiceUrl).style.display="block"; 
+				 document.getElementById(voicequest).innerHTML="Close Listen/Watch";
+			 }
+			
+			   
 		 }
 		
 	} 
 	
-	function openorderuservideo(elderUserVoiceUrl){
+	function openorderuservideo(elderUserVoiceUrl,elderUserResponse){
 		 if(elderUserVoiceUrl==null||elderUserVoiceUrl==""){
 			  alertx("No chat audio.", 'Tips'); 
+		 }else if(elderUserVoiceUrl.indexOf("amr")!="-1"){
+			 $.jBox.confirm("AMR file needs to be downloaded to be played. Do you want to download it?", "Download Prompt", function (v, h, f) {
+				 if (v == 'ok'){
+					 var $form = $('<form method="GET"></form>');
+			            $form.attr('action', elderUserVoiceUrl);
+			            $form.appendTo($('body'));
+			            $form.submit();    
+				 }
+				                             
+		     });
 		 }else{
-			 window.open(elderUserVoiceUrl);
+			 if(document.getElementById(elderUserVoiceUrl).style.display=="block"){
+					
+				 document.getElementById(elderUserVoiceUrl).style.display="none";
+				 document.getElementById(elderUserVoiceUrl).pause();
+				 document.getElementById(elderUserResponse).innerHTML="Listen/Watch";
+			 }else{
+				 document.getElementById(elderUserVoiceUrl).style.display="block"; 
+				 
+				 document.getElementById(elderUserResponse).innerHTML="Close Listen/Watch";
+			
+			 }
+			    
 		 }
 		
 	}

@@ -120,11 +120,11 @@ public class PageController {
 			EarthOperator webUser = (EarthOperator) request.getSession().getAttribute("user");
 			StringBuffer s=new StringBuffer();
 			String tree="";
-			if("admin".equals(webUser.getLoginname())){
+//			if("admin".equals(webUser.getLoginname())){
 				tree=authorService.buildAdminPermissionTree(s);
-			}else{
-				tree=authorService.buildAdminPermissionTree3(s,webUser.getEarthmenu());
-			}
+//			}else{
+//				tree=authorService.buildAdminPermissionTree3(s,webUser.getEarthmenu());
+//			}
  
 			model.addAttribute("tree",tree);
 		} catch (Exception e) {

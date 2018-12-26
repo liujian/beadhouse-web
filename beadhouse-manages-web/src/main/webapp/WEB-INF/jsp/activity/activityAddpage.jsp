@@ -98,7 +98,7 @@
 	    	 </li>
              
 	    	 <li>
-	    		<label><font color="#f00">*</font>activity</label>
+	    		<label><font color="#f00">*</font>Activity</label>
 	    	<input name="activity" id="activity" type="text" class="dfinput" value="${obj.activity}" />
 	    	 </li>
 

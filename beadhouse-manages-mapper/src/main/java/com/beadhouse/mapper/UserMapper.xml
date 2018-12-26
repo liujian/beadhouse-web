@@ -64,7 +64,7 @@
       #{password,jdbcType=VARCHAR},
       #{firstName,jdbcType=VARCHAR},
       #{lastName,jdbcType=VARCHAR},
-      #{phone,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=VARCHAR},
       #{token,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}

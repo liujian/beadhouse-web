@@ -163,11 +163,10 @@
 	    	 </li>
 	    	 <li>
 	    		<label style="width:120px;"><font color="#f00">*</font>User's Birthday</label>
-<%-- 	    	  <input name="birthday" id="birthday" type="text" class="dfinput"  placeholder="Please enter" value="${obj.birthday}" />
- --%>	    	<input type="text"  placeholder="Please Select The Date"  id="birthday" name="birthday" value="${obj.birthday}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
+	    	<input type="text"  placeholder="Please Select The Date"  id="birthday" name="birthday" value="${obj.birthday}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
 	    	 </li>
 	    	  <li>
-	    		<label style="width:120px;"><font color="#f00">*</font>Elder's Phone</label>
+	    		<label style="width:120px;"><font color="#f00">*</font>User's Phone</label>
 	    		<input name="phone" id="phone" type="text" class="dfinput" placeholder="Please enter" value="${obj.phone}" />
 	    		
 	    	 </li>

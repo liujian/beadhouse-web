@@ -70,7 +70,7 @@ public class UserController {
 		obj.setPassword(user.getPassword());
 		obj.setFirstName(user.getFirstName());
 		obj.setLastName(user.getLastName());
-		obj.setPhone(user.getLastName());
+		obj.setPhone(user.getPhone());
         obj.setBirthday(user.getBirthday());
 		obj.setCreateDate(new Date());
 		userService.inserUser(obj);
@@ -98,7 +98,7 @@ public class UserController {
 		obj.setPassword(user.getPassword());
 		obj.setFirstName(user.getFirstName());
 		obj.setLastName(user.getLastName());
-		obj.setPhone(user.getLastName());
+		obj.setPhone(user.getPhone());
         obj.setBirthday(user.getBirthday());
         obj.setUpdateDate(new Date());
 		userService.updateUser(obj);

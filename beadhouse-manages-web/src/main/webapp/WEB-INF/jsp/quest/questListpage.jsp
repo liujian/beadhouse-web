@@ -15,6 +15,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <style type="text/css">
 
+table th{white-space: nowrap;}
+table td{white-space: nowrap;}
+body,table{font-size:12px;}
+table{empty-cells:show; border-collapse: collapse; margin:0 auto;}
+h1,h2,h3{ font-size:12px;margin:0; padding:0;}
+table.imgtable{border:1px solid #cad9ea;color:#666;}
+table.imgtable th {background-repeat:repeat-x;height:30px;}
+table.imgtable td,table.imgtable th{border:1px solid #cad9ea;padding:0 1em 0;}
+table.imgtable tr{background-color:#f5fafe;height:30px;}
+
 </style>
      <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
      <script type="text/javascript" src="<%=basePath%>js/jquery.form.js"></script>
@@ -43,9 +53,11 @@ $(document).ready(function(){
 	    
 	});
 	function query(){
+		 debugger;
 		   $("#searchForm").attr(
 					"action",
-					"<%=basePath%>/Quest/QuestList");
+					"<%=basePath%>Quest/QuestList");
+		   debugger;
 			loading('Enquiries, please wait a moment...');
            $("#searchForm").submit();
 	}
@@ -87,7 +99,7 @@ $(document).ready(function(){
        
     <thead>
     <tr>
-	    <th width="100px;">serial#</th>
+	    <th width="100px;">Serial#</th>
 	    <th>Question</th>
 	    <th>Sort</th>
 	    <th>Action</th>

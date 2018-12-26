@@ -5,9 +5,13 @@
   
     <id column="chatid" property="chatid" jdbcType="INTEGER" />
     <result column="loginUserId" jdbcType="INTEGER" property="loginUserId" />
-     <result column="emailAddress" jdbcType="VARCHAR" property="emailAddress" />
+    <result column="emailAddress" jdbcType="VARCHAR" property="emailAddress" />
+    <result column="firstName" jdbcType="VARCHAR" property="firstName" />
+    <result column="lastName" jdbcType="VARCHAR" property="lastName" />
     <result column="elderUserId" jdbcType="INTEGER" property="elderUserId" />
-     <result column="elderUserEmail" jdbcType="VARCHAR" property="elderUserEmail" />
+    <result column="elderUserEmail" jdbcType="VARCHAR" property="elderUserEmail" />
+    <result column="elderFirstName" jdbcType="VARCHAR" property="elderFirstName" />
+    <result column="elderLastName" jdbcType="VARCHAR" property="elderLastName" />
     <result column="questId" jdbcType="INTEGER" property="questId" />
     <result column="defineQuestId" jdbcType="INTEGER" property="defineQuestId" />
     <result column="defineQuest" jdbcType="VARCHAR" property="defineQuest" />
@@ -29,8 +33,12 @@
     Table_Chat_History.chatid,
 	Table_Chat_History.loginUserId,
 	Table_login_user.emailAddress,
+	Table_login_user.firstName,
+	Table_login_user.lastName,
 	Table_Chat_History.elderUserId,
 	Table_elder_user.elderUserEmail,
+	Table_elder_user.elderFirstName,
+	Table_elder_user.elderLastName,
 	Table_Chat_History.questId,
 	Table_Chat_History.defineQuestId,
 	table_define_quest.defineQuest,

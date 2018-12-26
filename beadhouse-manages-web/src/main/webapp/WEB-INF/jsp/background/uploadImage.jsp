@@ -9,9 +9,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>Background Configuration</title>
+    <title>Sleep Mode Advertisement Management</title>
 	<link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
+table th{white-space: nowrap;}
+table td{white-space: nowrap;}
+body,table{font-size:12px;}
+table{empty-cells:show; border-collapse: collapse; margin:0 auto;}
+h1,h2,h3{ font-size:12px;margin:0; padding:0;}
+table.imgtable{border:1px solid #cad9ea;color:#666;}
+table.imgtable th {background-repeat:repeat-x;height:30px;}
+table.imgtable td,table.imgtable th{border:1px solid #cad9ea;padding:0 1em 0;}
+table.imgtable tr{background-color:#f5fafe;height:30px;}
+
  .background { 
     display: block; 
     width: 100%; 
@@ -125,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 
 		function findimg(id){
 			//var id= encodeURI(encodeURI(id));
-               $.jBox.open("iframe:<%=basePath%>/background/Imageview?id="+id+"", "Background" ,500, 420,{
+               $.jBox.open("iframe:<%=basePath%>/background/Imageview?id="+id+"", "Advertisement Preview" ,500, 420,{
                    buttons: {  'Return': "cancel"},
                    loaded: function (h) {
                     
@@ -170,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="place">
    <span>Location:</span>
     <ul class="placeul">
-    <li>Background Management</li>
+    <li>Sleep Mode Advertisement Management</li>
     </ul>
     </div>
     
@@ -179,14 +189,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="formtitle">
  
     
-    <span>Background Configuration</span>
+    <span>Advertisement Configuration</span>
  
     </div>
     <form action="/background/uploadpage" method="post" id="searchForm" enctype="multipart/form-data" >
 	    <ul class="forminfo">
 		    
 		        <li style="width:280px;">
-		        <label><font color="#f00" >*</font>Upload Background</label>
+		        <label><font color="#f00" >*</font>Upload Picture</label>
 	    		 <input type="file"  id="file" name="image" accept="image/*" /> <i id="accTip" style="color: #f00;"></i>
 	    	   </li>
 		     
@@ -200,12 +210,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="rightinfo">
         
 			    <table class="imgtable">
-			       <p style="text-align:center"><b>Advertising Photo Browsing</b></p>
+			       <p style="text-align:center"><b>Manage Advertisement Pictures</b></p>
 			       <br>
 				    <thead>
 				    <tr>	    
 					    <th width="100px;">Serial#</th>
-					    <th>Background URL</th>
+					    <th>Picture URL</th>
 					    <th>Preview</th>
 				    </tr>
 				    </thead>

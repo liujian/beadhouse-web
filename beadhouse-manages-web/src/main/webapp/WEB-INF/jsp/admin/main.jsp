@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
-		<title>Elderly management system interface</title>
+		<title>The Mapleton Connect Management System</title>
 	</head>
 	<frameset rows="80,*" cols="*" frameborder="no" border="0" framespacing="0">
 		<frame src="top" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />

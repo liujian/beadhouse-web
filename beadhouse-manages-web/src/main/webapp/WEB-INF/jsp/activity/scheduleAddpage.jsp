@@ -114,8 +114,8 @@
 	    	<input name="scheduleId" id=scheduleId type="text" class="dfinput" value="${obj.scheduleId}" />
 	    	 </li>
             
-	        <li ><label><font color="#f00">*</font>Date</label>
-	   		<input type="text"  placeholder="Please Select The Date"  id="date" name="date" value="${obj.dateString}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
+	        <li ><label><font color="#f00">*</font>Calendar</label>
+	   		<input type="text"  placeholder="Select a date"  id="date" name="date" value="${obj.dateString}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
 	   		</li>
 	    
 	    	<li>

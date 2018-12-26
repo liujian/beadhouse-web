@@ -14,7 +14,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
-
+table th{white-space: nowrap;}
+table td{white-space: nowrap;}
+body,table{font-size:12px;}
+table{empty-cells:show; border-collapse: collapse; margin:0 auto;}
+h1,h2,h3{ font-size:12px;margin:0; padding:0;}
+table.imgtable{border:1px solid #cad9ea;color:#666;}
+table.imgtable th {background-repeat:repeat-x;height:30px;}
+table.imgtable td,table.imgtable th{border:1px solid #cad9ea;padding:0 1em 0;}
+table.imgtable tr{background-color:#f5fafe;height:30px;}
 </style>
      <script type="text/javascript" src="<%=basePath%>js/jquery.js"></script>
      <script type="text/javascript" src="<%=basePath%>js/jquery.form.js"></script>
@@ -73,8 +81,8 @@ $(document).ready(function(){
     <div class="rightinfo">
            <form id="searchForm" action="/activity/scheduleList" method="post">
 	        <ul class="seachform">
-		     <li><label>日期</label>  
-        	 <input type="text"  placeholder="请选择查询日期"  id="date" name="date" value="${date}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
+		     <li><label>Calendar</label>  
+        	 <input type="text"  placeholder="Select a date"  id="date" name="date" value="${date}"  class="scinput" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,isShowClear:true})" />
   	         </li>
 		    
 		     <li><label>&nbsp;</label>
@@ -92,11 +100,11 @@ $(document).ready(function(){
        
     <thead>
     <tr>
-	    <th width="100px;">serial#</th>
-	    <th>date</th>
-	    <th>breakfast</th>
-	    <th>lunch</th>
-	    <th>dinner</th>
+	    <th width="100px;">Serial#</th>
+	    <th>Date</th>
+	    <th>Breakfast</th>
+	    <th>Lunch</th>
+	    <th>Dinner</th>
 	    <th>Action</th>
     </tr>
     </thead>

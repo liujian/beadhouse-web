@@ -276,8 +276,8 @@ h2{font-weight:normal;}
 .imgtable td p{color:#919191;}
 .imgtable td i{font-style:normal; color:#ea2020;}
 .imgtd{text-indent:0;}
-.imgtable tbody tr.odd{background:#f5f8fa;}
-.imgtable tbody tr:hover{background:#e5ebee;}
+.imgtable tbody tr.odd{background:#f5f8fa;} 
+.imgtable tbody tr:hover{background:#e5ebee;} 
 
 /*tab*/
 .itab{height:36px; border-bottom:solid 1px #d0dee5; position:relative; border-left:solid 1px #d3dbde;}

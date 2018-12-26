@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
-		<title>Welcome to login elderly management system</title>
+		<title>The Mapleton Connect Management System</title>
 		<link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" src="<%=basePath%>js/jquery.js"></script>
 		<script src="<%=basePath%>js/cloud.js" type="text/javascript"></script>
@@ -108,7 +108,7 @@
 		</div>
 
 		<div class="logintop">
-			<span>Elderly management system</span>
+			<span>The Mapleton Connect Management System</span>
 			<ul>
 				
 			</ul>
@@ -131,7 +131,7 @@
 							<input name="" type="button"
 							 class="loginbtn" value="Login" onclick="login_btn()" />
 							<label>
-								<input name="" type="checkbox" value="" checked="checked" />Remember the password
+								<input name="" type="checkbox" value="" checked="checked" />Remember Password
 							</label>
 							<!-- <label>
 								<a href="#">Forget your password?</a>

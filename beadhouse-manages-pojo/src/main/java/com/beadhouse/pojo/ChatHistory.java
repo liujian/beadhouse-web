@@ -16,9 +16,17 @@ public class ChatHistory implements Serializable{
 	
 	private String emailAddress;
 	
+	private String firstName;
+	
+	private String lastName;
+	
 	private Integer elderUserId;
 	
 	private String elderUserEmail;
+	
+	private String elderFirstName;
+	
+	private String elderLastName;
 	
 	private Integer questId;
 
@@ -134,6 +142,40 @@ public class ChatHistory implements Serializable{
 
 	public void setQuestDate(Date questDate) {
 		this.questDate = questDate;
+	}
+
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getElderFirstName() {
+		return elderFirstName;
+	}
+
+	public void setElderFirstName(String elderFirstName) {
+		this.elderFirstName = elderFirstName;
+	}
+
+	public String getElderLastName() {
+		return elderLastName;
+	}
+
+	public void setElderLastName(String elderLastName) {
+		this.elderLastName = elderLastName;
 	}
 
 	public String getElderUserResponse() {

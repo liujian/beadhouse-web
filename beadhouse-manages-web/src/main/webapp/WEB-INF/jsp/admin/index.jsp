@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
   	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <base href="<%=basePath%>">
-    <title>Elderly management system interface</title>
+    <title>The Mapleton Connect Management System</title>
 	<link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css" />
 
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
@@ -31,8 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="place">
 	    <span>Location：</span>
 	    <ul class="placeul">
-		    <li>Elderly management system interface</li>
-			<li>home page</li>
+		    <li>The Mapleton Connect Management System</li>
+			<li>Home Page</li>
 	    </ul>
     </div>
     
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 	    <div class="welinfo">
 	    	<span><img src="images/sun.png" alt="天气" /></span>
-	    	<b>${user.loginname} Hello, you are the administrator, welcome to use the elderly management system.</b> 
+	    	<b>Hello ${user.loginname}. You are the administrator. Welcome to The Mapleton Connect Management System.</b> 
 	   	 
 	    	
 	    </div>
